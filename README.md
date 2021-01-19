@@ -24,7 +24,7 @@ First, make sure you log into Facebook with the keep me logged in option checked
 
 ### Execute the script
 
-Run, using Python 2:
+Run, using Python 3:
 
     python download.py
 
