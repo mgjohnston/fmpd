@@ -19,9 +19,13 @@ with open(FBID_FILE) as fbids:
         fbid = fbid.rstrip()
 
         # The fbid URL doesn't point to the picture but to a page that generates a URL for the file. Get that URL
-        redirect = subprocess.check_output(['curl', '--cookie', COOKIES_FILE, '-A', AGENT, PREFIX + fbid])
+        redirect = subprocess.check_output(['curl', '--cookie', COOKIES_FILE, '-A', AGENT, PREFIX + fbid]).decode("utf-8")
         print(PREFIX+fbid)
+        FinalwNone = re.search(r'(?<=url=).*?(?=")', redirect)
+        if FinalwNone is None:
+            continue
         final = re.search(r'(?<=url=).*?(?=")', redirect).group(0).replace('&amp;', '&')
+        print (type(final))
 
         # Download the actual pic
         subprocess.Popen([
